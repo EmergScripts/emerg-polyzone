@@ -50,7 +50,7 @@ Citizen.CreateThread(function()
 					if tempData[polyZone.uid][playerId] == nil then
 						-- If debug is enabled
 						if polyZone.debug then
-							print("EmergScripts:PolyZones - Player " .. playerId .. " has entered poly zone " .. polyZone.name .. " (" .. polyZone.uid .. ")")
+							print("EmergScripts:PolyZones - Player " .. playerId .. " has entered poly zone " .. polyZone.uid)
 						end
 
 						-- Trigger the event
@@ -65,7 +65,7 @@ Citizen.CreateThread(function()
 					if tempData[polyZone.uid][playerId] ~= nil then
 						-- If debug is enabled
 						if polyZone.debug then
-							print("EmergScripts:PolyZones - Player " .. playerId .. " has left poly zone " .. polyZone.name .. " (" .. polyZone.uid .. ")")
+							print("EmergScripts:PolyZones - Player " .. playerId .. " has left poly zone " .. polyZone.uid)
 						end
 
 						-- Trigger the event
@@ -90,6 +90,10 @@ end)
 RegisterNetEvent('EmergScripts:PolyZones:SaveZone', function(data)
 	-- write a file with the data
 	local file = io.open("EmergScriptsPolyZones.json", "w")
-	file:write(json.encode(data))
+	file:write(data)
 	file:close()
+end)
+
+RegisterNetEvent('EmergScripts:PolyZones:PrintZone', function(data)
+	print(data)
 end)

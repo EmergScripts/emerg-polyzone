@@ -52,7 +52,6 @@ RegisterCommand('setupZone', function(source, args, raw)
 	local cmd = args[1]
 	if cmd == "new" then
 		cmdData = 	{
-			name = nil,
 			uid = nil,
 			points = {},
 			height = nil,
@@ -63,9 +62,6 @@ RegisterCommand('setupZone', function(source, args, raw)
 		local x, y, z = table.unpack(GetEntityCoords(PlayerPedId()))
 		table.insert(cmdData.points, vector3(x, y, z))
 		print("Added point: " .. x .. ", " .. y .. ", " .. z)
-	elseif cmd == "name" then
-		cmdData.name = args[2]
-		print("Set name to: " .. cmdData.name)
 	elseif cmd == "uid" then
 		-- Make sure no spaces
 		if string.find(args[2], " ") ~= nil then
@@ -92,13 +88,7 @@ RegisterCommand('setupZone', function(source, args, raw)
 			print("Height is not set")
 			return
 		end
-
-		-- check if all data is set
-		if cmdData.name == nil then
-			print("Name is not set")
-			return
-		end
-
+		
 		if cmdData.uid == nil then
 			print("Uid is not set")
 			return
@@ -112,7 +102,6 @@ RegisterCommand('setupZone', function(source, args, raw)
 		-- upload data
 		-- Format data into text format (not json)
 		local data = "{\n"
-		data = data .. "\tname = '" .. cmdData.name .. "',\n"
 		data = data .. "\tuid = '" .. cmdData.uid .. "',\n"
 		data = data .. "\tpoints = {\n"
 		for _, point in ipairs(cmdData.points) do
@@ -126,9 +115,16 @@ RegisterCommand('setupZone', function(source, args, raw)
 		--TriggerServerEvent("upload:data", data)
 		--print("Finished uploading data")
 	
-		TriggerServerEvent("EmergScripts:PolyZones:SaveZone", data)
-		print("Copied to clipboard")
+		if config.creationOutput == 'print_server' then
+			TriggerServerEvent("EmergScripts:PolyZones:PrintZone", data)
+			print("EmergScripts:PolyZones - Zone printed to server console")
+		elseif config.creationOutput == 'save_file' then
+			TriggerServerEvent("EmergScripts:PolyZones:SaveZone", data)
+			print("EmergScripts:PolyZones - Zone saved to file")
+		else
+			print(data)
+		end
 	else
-		print("Invalid command. Valid commands are: new, point, name, uid, finish")
+		print("Invalid command. Valid commands are: new, point, uid, finish")
 	end
 end)

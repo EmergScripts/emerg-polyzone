@@ -2,9 +2,10 @@ config = {}
 
 config.refreshTime = 1000 -- How often to check if the player is in a poly zone
 
+config.creationOutput = 'print_client' -- print_client, print_server, save_file
+
 config.polyZones = {
 	{
-		name = 'Sandy Security',
 		uid = 'sandy_pd_security',
 		points = {
 			vector3(1825.9876708984, 3680.8745117188, 33.326133728027),
@@ -16,7 +17,6 @@ config.polyZones = {
 		debug = false,
 	},
 	{
-		name = 'jailCells',
 		uid = 'jailCells',
 		points = {
 			vector3(1839.9630126953, 3671.6760253906, 33.312870025635),
@@ -40,15 +40,7 @@ function validateConfig()
 	end
 
 	for _, polyZone in ipairs(config.polyZones) do
-		if polyZone.name == nil then
-			print("EmergScripts:PolyZones - Box zone name is missing")
-		end
-
-		if polyZone.uid == nil then
-			print("EmergScripts:PolyZones - Box zone uid is missing")
-		end
 		
-
 		-- If Debug
 		if polyZone.debug == nil then
 			polyZone.debug = false
@@ -56,8 +48,8 @@ function validateConfig()
 
 		-- If Debug Print
 		if polyZone.debug then
-			print("EmergScripts:PolyZones - Box zone " .. polyZone.name .. " (" .. polyZone.uid .. ") has been loaded")
-			print("EmergScripts:PolyZones - Box zone " .. polyZone.name .. " (" .. polyZone.uid .. ") debug is enabled (Will impact client performance)")
+			print("EmergScripts:PolyZones - Poly zone " .. polyZone.uid .. " has been loaded")
+			print("EmergScripts:PolyZones - Poly zone " .. polyZone.uid .. " debug is enabled (Will impact client performance)")
 		end
 
 		config.polyZones[_] = polyZone
