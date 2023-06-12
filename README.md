@@ -3,7 +3,7 @@
 ### Description
 EmergScripts Polyzone is a FiveM resource that allows you to create and manage zones within your FiveM server. This documentation provides instructions on how to create zones and implement zone detection functionality in your client or server resource.
 
-##### Why Use EmergScripts Polyzone?
+#### Why Use EmergScripts Polyzone?
 EmergScripts Polyzone offers several advantages over other similar scripts:
 
 1. Server-Side Logic: The logic for zone detection and handling is performed on the server-side. This approach prevents event amplification, a common issue in client-side zone scripts. By handling the logic server-side, EmergScripts Polyzone provides a more efficient and optimized solution.
@@ -12,7 +12,7 @@ EmergScripts Polyzone offers several advantages over other similar scripts:
 
 3. Flexibility and Customization: EmergScripts Polyzone provides a flexible framework that allows you to create and manage zones according to your specific needs. You can define zones of any shape and size, set their height, and customize the actions taken when players enter or leave these zones. This versatility enables you to create unique gameplay experiences tailored to your server's requirements.
 
-##### Creating a Zone
+#### Creating a Zone
 To create a zone, follow these steps within FiveM:
 
 1. Run the following command: ``/setupZone new``
